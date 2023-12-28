@@ -2,20 +2,20 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setcount] = useState(0);
-  function handleclick() {
-    setcount(count + 1);
+  const [number, setcount] = useState(0);
+  function numberincrease() {
+    setcount(number + 1);
   }
-  function handleclick2() {
-    if (count > 0) {
-      setcount(count - 1);
+  function numberdecrease() {
+    if (number > 0) {
+      setcount(number - 1);
     }
   }
   return (
     <>
-      <h1>{count}</h1>
-      <button onClick={handleclick}>increment</button>
-      <button onClick={handleclick2} disabled={!count > 0}>
+      <h1>{number}</h1>
+      <button onClick={numberincrease}>increment</button>
+      <button onClick={numberdecrease} disabled={!number > 0}>
         decrement
       </button>
     </>
