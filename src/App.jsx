@@ -1,30 +1,29 @@
 import "./App.css";
 import { useState } from "react";
-import { useEffect } from "react";
+import { v4 } from "uuid";
+
 const App = () => {
-  const savedTodos = JSON.parse(localStorage.getItem("todos"));
-  const [todos, setTodos] = useState(savedTodos);
+  const [todos, setTodos] = useState([]);
 
-  const [inputValue, setInputValue] = useState("");
-
-  const [showInput, setShowInput] = useState(true);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  const [inputValue, setInputValue] = useState([]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+    console.log(event.target.value);
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (e) => {
+    e.preventDefault();
     if (inputValue.trim() !== "") {
-      setTodos([...todos, inputValue]);
+      setTodos([...todos, { name: inputValue, id: v4() }]);
       setInputValue("");
-      setShowInput(true);
-      
     }
   };
+
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   console.log(todos);
   return (
     <>
@@ -32,34 +31,38 @@ const App = () => {
         <h2 className="text-3xl mb-3">Todo App</h2>
 
         <div className="flex flex-col w-full pt-3 pb-3 gap-3">
-          {todos.map((todo, index) => (
-            <div key={index}>
-              {showInput && (
-                <div className="border border-slate-300  rounded-md pr-2 pl-2 h-8 cursor-pointer w-full hover:shadow-lg">
-                  {todo}
-                </div>
-              )}
+          {todos.map((todo) => (
+            <div
+              key={todo.id}
+              className="border border-slate-300 rounded-md pr-2 pl-2 h-8 cursor-pointer w-full hover:shadow-lg flex justify-between items-center"
+            >
+              <span>{todo.name}</span>
+              <button
+                className="ml-2 text-red-500"
+                onClick={() => handleDeleteTodo(todo.id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
 
         <h4 className=" w-full font-semibold">Todo</h4>
-        <form id="form">
-          <div className="flex flex-col gap-3 pt-2">
-            <input
-              type="text"
-              className="border border-slate-300  rounded-md pr-2 pl-2 h-8 hover:shadow-lg"
-              placeholder="Your Todo..."
-              value={inputValue}
-              onChange={handleInputChange}
-            />
-            <button
-              className="border w-20 pt-1 pb-1 font-normal rounded-md hover:shadow-lg border-slate-300 "
-              onClick={handleAddTodo}
-            >
-              Submit
-            </button>
-          </div>
+        <form
+          id="form"
+          className="flex flex-col gap-3 pt-2"
+          onSubmit={(e) => handleAddTodo(e)}
+        >
+          <input
+            type="text"
+            className="border border-slate-300  rounded-md pr-2 pl-2 h-8 hover:shadow-lg"
+            placeholder="Your Todo..."
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <button className="border w-20 pt-1 pb-1 font-normal rounded-md hover:shadow-lg border-slate-300 ">
+            Submit
+          </button>
         </form>
       </div>
     </>
