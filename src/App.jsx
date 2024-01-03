@@ -23,6 +23,17 @@ const App = () => {
   const handleDeleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+  const handleToggleComplete = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      });
+    });
+  };
 
   console.log(todos);
   return (
@@ -34,15 +45,30 @@ const App = () => {
           {todos.map((todo) => (
             <div
               key={todo.id}
-              className="border border-slate-300 rounded-md pr-2 pl-2 h-8 cursor-pointer w-full hover:shadow-lg flex justify-between items-center"
+              className="border border-slate-300 rounded-md pr-1 pl-2 h-8 cursor-pointer w-full  flex  items-center justify-between"
             >
-              <span>{todo.name}</span>
-              <button
-                className="ml-2 text-red-500"
-                onClick={() => handleDeleteTodo(todo.id)}
-              >
-                Delete
-              </button>
+              <div>
+                <input
+                  type="checkbox"
+                  className="mr-2 "
+                  checked={todo.completed}
+                  onChange={() => handleToggleComplete(todo.id)}
+                ></input>
+                <span>{todo.name}</span>
+              </div>
+
+              {todo.completed ? (
+                <button className="ml-2 text-white pl-2 pr-2 rounded-md bg-green-500 cursor-default">
+                  Completed
+                </button>
+              ) : (
+                <button
+                  className="ml-2 text-white pl-2 pr-2 rounded-md bg-red-500 hover:shadow-lg"
+                  onClick={() => handleDeleteTodo(todo.id)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -55,12 +81,12 @@ const App = () => {
         >
           <input
             type="text"
-            className="border border-slate-300  rounded-md pr-2 pl-2 h-8 hover:shadow-lg"
+            className="border border-slate-300  rounded-md pl-2 h-8 hover:shadow-lg"
             placeholder="Your Todo..."
             value={inputValue}
             onChange={handleInputChange}
           />
-          <button className="border w-20 pt-1 pb-1 font-normal rounded-md hover:shadow-lg border-slate-300 ">
+          <button className="border w-20 pt-1 pb-1 pr-0 font-normal rounded-md hover:shadow-lg border-slate-300 ">
             Submit
           </button>
         </form>
