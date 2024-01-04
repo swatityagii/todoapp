@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
-
-const TodoForm = ({ inputValue, handleInputChange, handleAddTodo }) => {
+function TodoForm(props) {
+  const { inputValue, handleInputChange, handleAddTodo } = props;
   return (
     <form
       id="form"
@@ -19,12 +18,6 @@ const TodoForm = ({ inputValue, handleInputChange, handleAddTodo }) => {
       </button>
     </form>
   );
-};
-
-TodoForm.propTypes = {
-  inputValue: PropTypes.string.isRequired,
-  handleInputChange: PropTypes.func.isRequired,
-  handleAddTodo: PropTypes.func.isRequired,
-};
+}
 
 export default TodoForm;
