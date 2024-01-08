@@ -1,4 +1,5 @@
 import Icons from "./Icons";
+import InputCheckbox from "./InputCheckbox";
 function TodoList(props) {
   const { todos, handleToggleComplete, handleDeleteTodo, handleEditTodo } =
     props;
@@ -8,15 +9,13 @@ function TodoList(props) {
       {todos.map((todo) => (
         <div
           key={todo.id}
-          className="border border-slate-300 rounded-md pr-1 pl-2 h-8 w-full  flex  items-center justify-between"
+          className="border border-slate-300 rounded-md pr-1 pl-2 h-8 w-full  flex items-center justify-between"
         >
-          <div>
-            <input
-              type="checkbox"
-              className="mr-2 cursor-pointer"
+          <div className="flex overflow-scroll ">
+            <InputCheckbox
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
-            ></input>
+            />
             <span>{todo.name}</span>
           </div>
 
@@ -25,7 +24,6 @@ function TodoList(props) {
             onEdit={() => handleEditTodo(todo.id)}
             onDelete={() => handleDeleteTodo(todo.id)}
           />
-           
         </div>
       ))}
     </div>
@@ -33,3 +31,5 @@ function TodoList(props) {
 }
 
 export default TodoList;
+
+

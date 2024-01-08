@@ -3,7 +3,6 @@ import { v4 } from "uuid";
 import TodoList from "./Components/TodoList";
 import TodoForm from "./Components/TodoForm";
 
-
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
