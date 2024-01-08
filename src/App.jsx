@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { v4 } from "uuid";
-import TodoList from "./TodoList";
-import TodoForm from "./TodoForm";
+import TodoList from "./Components/TodoList";
+import TodoForm from "./Components/TodoForm";
+
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [editTodoId, setEditTodoId] = useState(null);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-
+  
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== "") {
-      setTodos([...todos, { name: inputValue, id: v4() }]);
+      if (editTodoId !== null) {
+        setTodos((prevTodos) =>
+          prevTodos.map((todo) =>
+            todo.id === editTodoId ? { ...todo, name: inputValue } : todo
+          )
+        );
+        setEditTodoId(null);
+      } else {
+        setTodos([...todos, { name: inputValue, id: v4() }]);
+      }
       setInputValue("");
     }
   };
@@ -30,6 +41,12 @@ const App = () => {
       )
     );
   };
+  const handleEditTodo = (id) => {
+    const todoToEdit = todos.find((todo) => todo.id === id);
+    setEditTodoId(id);
+    setInputValue(todoToEdit.name);
+    
+  };
 
   return (
     <>
@@ -40,6 +57,7 @@ const App = () => {
           todos={todos}
           handleToggleComplete={handleToggleComplete}
           handleDeleteTodo={handleDeleteTodo}
+          handleEditTodo={handleEditTodo}
         />
 
         <h4 className=" w-full font-semibold">Todo</h4>

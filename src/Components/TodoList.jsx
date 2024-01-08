@@ -8,12 +8,12 @@ function TodoList(props) {
       {todos.map((todo) => (
         <div
           key={todo.id}
-          className="border border-slate-300 rounded-md pr-1 pl-2 h-8 cursor-pointer w-full  flex  items-center justify-between"
+          className="border border-slate-300 rounded-md pr-1 pl-2 h-8 w-full  flex  items-center justify-between"
         >
           <div>
             <input
               type="checkbox"
-              className="mr-2 "
+              className="mr-2 cursor-pointer"
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
             ></input>
@@ -25,6 +25,7 @@ function TodoList(props) {
             onEdit={() => handleEditTodo(todo.id)}
             onDelete={() => handleDeleteTodo(todo.id)}
           />
+           
         </div>
       ))}
     </div>
