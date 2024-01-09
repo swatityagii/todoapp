@@ -1,6 +1,6 @@
-function Input(props) {
+import PropTypes from "prop-types";
+export function Input(props) {
   const { inputValue, handleInputChange } = props;
-
   return (
     <input
       type="text"
@@ -11,5 +11,23 @@ function Input(props) {
     />
   );
 }
+Input.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+};
+export function InputCheckbox({ checked, onChange }) {
+  return (
+    <input
+      type="checkbox"
+      className="mr-2 cursor-pointer"
+      checked={checked}
+      onChange={onChange}
+      
+    />
+  );
+}
 
-export default Input;
+InputCheckbox.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+};

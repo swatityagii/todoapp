@@ -1,5 +1,7 @@
 import Icons from "./Icons";
-import InputCheckbox from "./InputCheckbox";
+import { InputCheckbox } from "./Input";
+import PropTypes from 'prop-types';
+
 function TodoList(props) {
   const { todos, handleToggleComplete, handleDeleteTodo, handleEditTodo } =
     props;
@@ -16,6 +18,7 @@ function TodoList(props) {
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
             />
+
             <span>{todo.name}</span>
           </div>
 
@@ -29,7 +32,17 @@ function TodoList(props) {
     </div>
   );
 }
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  handleToggleComplete: PropTypes.func.isRequired,
+  handleDeleteTodo: PropTypes.func.isRequired,
+  handleEditTodo: PropTypes.func.isRequired,
+};
+
 
 export default TodoList;
-
-

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 } from "uuid";
 import TodoList from "./Components/TodoList";
 import TodoForm from "./Components/TodoForm";
-
+import { AllcompleteBadge } from "./Components/Badge";
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -15,7 +15,8 @@ const App = () => {
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (inputValue.trim() !== "") {
-      if (editTodoId !== null) {
+      if (editTodoId !== null)
+       {
         setTodos((prevTodos) =>
           prevTodos.map((todo) =>
             todo.id === editTodoId ? { ...todo, name: inputValue } : todo
@@ -46,11 +47,18 @@ const App = () => {
     setInputValue(todoToEdit.name);
     
   };
+  const areAllTodosComplete = () => {
+    return todos.every((todo) => todo.completed);
+  };
+  
 
   return (
     <>
       <div className="pl-[200px] pr-[200px] pt-20 pb-20">
         <h2 className="text-3xl mb-3">Todo App</h2>
+        
+        {areAllTodosComplete() && <AllcompleteBadge />}
+
 
         <TodoList
           todos={todos}

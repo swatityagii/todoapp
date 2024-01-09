@@ -1,5 +1,6 @@
-import Input from "./Input";
+import { Input } from "./Input";
 import SubmitButton from "./SubmitButton";
+import PropTypes from 'prop-types';
 
 function TodoForm(props) {
   const { inputValue, handleInputChange, handleAddTodo } = props;
@@ -10,9 +11,14 @@ function TodoForm(props) {
       onSubmit={(e) => handleAddTodo(e)}
     >
       <Input inputValue={inputValue} handleInputChange={handleInputChange} />
+
       <SubmitButton />
     </form>
   );
 }
-
+TodoForm.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleAddTodo: PropTypes.func.isRequired,
+};
 export default TodoForm;
