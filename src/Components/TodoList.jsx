@@ -1,4 +1,4 @@
-import Icons from "./Icons";
+import BadgeIcons from "./BadgeIcons"
 import { InputCheckbox } from "./Input";
 import PropTypes from 'prop-types';
 
@@ -6,6 +6,7 @@ function TodoList(props) {
   const { todos, handleToggleComplete, handleDeleteTodo, handleEditTodo } =
     props;
 
+  
   return (
     <div className="flex flex-col w-full pt-3 pb-3 gap-3">
       {todos.map((todo) => (
@@ -22,7 +23,7 @@ function TodoList(props) {
             <span>{todo.name}</span>
           </div>
 
-          <Icons
+          <BadgeIcons
             completed={todo.completed}
             onEdit={() => handleEditTodo(todo.id)}
             onDelete={() => handleDeleteTodo(todo.id)}
