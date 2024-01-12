@@ -14,22 +14,24 @@ const App = () => {
     setInputValue(event.target.value);
   };
   
-  const handleAddTodo = (e) => {
+  const handleAddTodo = (e,isSubmit) => {
     e.preventDefault();
-    if (inputValue.trim() !== "") {
+    if (isSubmit && inputValue.trim() !== "") {
       if (editTodoId !== null)
        {
         setTodos((prevTodos) =>
           prevTodos.map((todo) =>
             todo.id === editTodoId ? { ...todo, name: inputValue } : todo
+
           )
         );
         setEditTodoId(null);
       } else {
         setTodos([...todos, { name: inputValue, id: v4() }]);
       }
-      setInputValue("");
+      
     }
+    setInputValue("");
   };
 
   const handleDeleteTodo = (id) => {
@@ -66,6 +68,7 @@ const App = () => {
         return todos;   
     }
   };
+
   return (
     <>
       <div className="pl-[200px] pr-[200px] pt-20 pb-20">
@@ -76,19 +79,23 @@ const App = () => {
           handleToggleComplete={handleToggleComplete}
           handleDeleteTodo={handleDeleteTodo}
           handleEditTodo={handleEditTodo}
+          editTodoId={editTodoId}
         />
 
         <h4 className=" w-full font-semibold">Todo</h4>
+        {todos.length > 0 && (
         <div className="mt-2">
         <FilterButton label="All" color="bg-sky-500" hovercolor="hover:bg-sky-600" onClick={() => filterTasks("all")}  
         />
         <FilterButton label="Completed" color="bg-green-500" hovercolor="hover:bg-green-600"  onClick={() => filterTasks("Completed")}  />
         <FilterButton label="Incomplete" color="bg-red-500" hovercolor=" hover:bg-red-600" onClick={() => filterTasks("Incomplete")}  />
         </div>
+        )}
         <TodoForm
           inputValue={inputValue}
           handleInputChange={handleInputChange}
           handleAddTodo={handleAddTodo}
+          isEditMode={true }
         />
       </div>
     </>

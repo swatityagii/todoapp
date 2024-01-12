@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 function Icons({color,selectedIcon,onClick} ){
     return (
-    <button
+    <span
         className={`ml-3 ${color}`}
         onClick={onClick}
       >
       {selectedIcon && selectedIcon === "TiPencilAlt" && <TfiPencilAlt />}
       {selectedIcon && selectedIcon === "ImBin" && <ImBin />}
       
-      </button>
+      </span>
     );
   }
   Icons.propTypes = {
