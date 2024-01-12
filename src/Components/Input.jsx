@@ -1,33 +1,23 @@
 import PropTypes from "prop-types";
 export function Input(props) {
-  const { inputValue, handleInputChange } = props;
+  const { inputValue, checked, onChange, type, className, placeholder } = props;
   return (
     <input
-      type="text"
-      className="border border-slate-300  rounded-md pl-2 h-8 hover:shadow-lg"
-      placeholder="Your Todo..."
+      className={className}
+      placeholder={placeholder}
+      type={type}
       value={inputValue}
-      onChange={handleInputChange}
+      checked={checked}
+      onChange={onChange}
     />
   );
 }
 Input.propTypes = {
   inputValue: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
-};
-export function InputCheckbox({ checked, onChange }) {
-  return (
-    <input
-      type="checkbox"
-      className="mr-2 cursor-pointer"
-      checked={checked}
-      onChange={onChange}
-      
-    />
-  );
-}
-
-InputCheckbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };

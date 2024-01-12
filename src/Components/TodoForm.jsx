@@ -1,22 +1,38 @@
 import { Input } from "./Input";
-import SubmitCancelButton from "./SubmitCancelButton";
 import PropTypes from "prop-types";
+import Button from "./Button";
 
 function TodoForm(props) {
-  const { inputValue, handleInputChange, handleAddTodo,isEditMode } = props;
-  const submitLabel = isEditMode ? "Update" : "Submit";
-
+  const { inputValue, handleInputChange, handleAddTodo, isEditMode } = props;
+  
   return (
     <form
       id="form"
       className="flex flex-col gap-3 pt-2"
-      onSubmit={(e) => handleAddTodo(e,isEditMode)}
+      onSubmit={(e) => handleAddTodo(e, true)}
     >
-      <Input inputValue={inputValue} handleInputChange={handleInputChange} className />
-      <div className="">
-        <SubmitCancelButton label={submitLabel} />
+      <Input
+        className="border border-slate-300  rounded-md pl-2 h-8 hover:shadow-lg"
+        inputValue={inputValue}
+        onChange={handleInputChange}
+        placeholder="Your Todo..."
+        type="text"
+      />
 
-        <SubmitCancelButton label="Cancel" onClick={(e) => handleAddTodo(e, false) } margin="ml-4" />
+      <div className="">
+        {isEditMode ? (
+          <>
+            <Button label="Update" />
+
+            <Button
+              label="Cancel"
+              onClick={() => handleAddTodo( false) }
+              margin="ml-4"
+            />
+          </>
+        ) : (
+          <Button label="Submit" />
+        )}
       </div>
     </form>
   );
