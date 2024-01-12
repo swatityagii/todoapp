@@ -4,7 +4,7 @@ import Button from "./Button";
 
 function TodoForm(props) {
   const { inputValue, handleInputChange, handleAddTodo, isEditMode } = props;
-  
+
   return (
     <form
       id="form"
@@ -12,7 +12,8 @@ function TodoForm(props) {
       onSubmit={(e) => handleAddTodo(e, true)}
     >
       <Input
-        className="border border-slate-300  rounded-md pl-2 h-8 hover:shadow-lg"
+        className={`border rounded-md pl-2 h-8 hover:shadow-lg ${ inputValue.trim() === "" && isEditMode ? 'border-red-500 border-2 focus:outline-none' : 'border-slate-300'}  `}
+
         inputValue={inputValue}
         onChange={handleInputChange}
         placeholder="Your Todo..."
@@ -22,13 +23,18 @@ function TodoForm(props) {
       <div className="">
         {isEditMode ? (
           <>
+          {inputValue.trim() === "" && (
+              <p className="text-red-500 mb-3">
+                *You cannot update the task to empty, Please enter some valid task.
+              </p>
+            )}
             <Button label="Update" />
-
             <Button
               label="Cancel"
-              onClick={() => handleAddTodo( false) }
+              onClick={() => handleAddTodo(false)}
               margin="ml-4"
             />
+            
           </>
         ) : (
           <Button label="Submit" />

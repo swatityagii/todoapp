@@ -1,4 +1,4 @@
-import Icons from "./Icons";
+import BadgesAndIcons from "./BadgesAndIcons";
 import { Input } from "./Input";
 import PropTypes from "prop-types";
 
@@ -17,7 +17,7 @@ function TodoList(props) {
         <div
           key={todo.id}
           className={`border border-slate-300 rounded-md pr-1 pl-2 h-8 w-full  flex items-center justify-between ${
-            todo.id !== editTodoId ? "border" : "border-slate-900" && "border-2"
+            todo.id !== editTodoId ? "border" : "border-slate-900" && "border-sky-500 border-2"
           }`}
         >
           <div className="flex overflow-scroll ">
@@ -30,7 +30,7 @@ function TodoList(props) {
             <span>{todo.name}</span>
           </div>
 
-          <Icons
+          <BadgesAndIcons
             completed={todo.completed}
             onEdit={() => handleEditTodo(todo.id)}
             onDelete={() => handleDeleteTodo(todo.id)}

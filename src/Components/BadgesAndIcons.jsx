@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TfiPencilAlt } from "react-icons/tfi";
 import { ImBin } from "react-icons/im";
 
-function Icons(props) {
+function BadgesAndIcons(props) {
   const { completed, onEdit, onDelete } = props;
 
   return (
@@ -19,9 +19,9 @@ function Icons(props) {
     </div>
   );
 }
-Icons.propTypes = {
+BadgesAndIcons.propTypes = {
   completed: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
-export default Icons;
+export default BadgesAndIcons;
