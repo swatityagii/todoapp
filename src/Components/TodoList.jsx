@@ -1,7 +1,6 @@
 import BadgesAndIcons from "./BadgesAndIcons";
 import { Input } from "./Input";
 import PropTypes from "prop-types";
-
 function TodoList(props) {
   const {
     todos,
@@ -16,8 +15,10 @@ function TodoList(props) {
       {todos.map((todo) => (
         <div
           key={todo.id}
-          className={`border border-slate-300 rounded-md pr-1 pl-2 h-8 w-full  flex items-center justify-between ${
-            todo.id !== editTodoId ? "border" : "border-slate-900" && "border-sky-500 border-2"
+          className={`border rounded-md pr-1 pl-2 h-8 w-full  flex items-center justify-between ${
+            todo.id !== editTodoId
+              ? "border-slate-300"
+              : "border-sky-500 border-2"
           }`}
         >
           <div className="flex overflow-scroll ">

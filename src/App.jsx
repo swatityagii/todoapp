@@ -65,7 +65,23 @@ const App = () => {
         return todos;
     }
   };
-
+  const filterButtons = [
+    {
+      label: "All",
+      color: "bg-sky-500 hover:bg-sky-600",
+      onClick: () => filterTasks("all"),
+    },
+    {
+      label: "Completed",
+      color: "bg-green-500 hover:bg-green-600",
+      onClick: () => filterTasks("Completed"),
+    },
+    {
+      label: "Incomplete",
+      color: "bg-red-500 hover:bg-red-600",
+      onClick: () => filterTasks("Incomplete"),
+    },
+  ];
   return (
     <>
       <div className="md:pl-[140px] md:pr-[140px] sm:pl-[80px] sm:pr-[80px] pl-[20px] pr-[20px] pt-20 pb-20">
@@ -82,22 +98,14 @@ const App = () => {
         <h4 className=" w-full font-semibold">Todo</h4>
         {todos.length > 0 && (
           <div className="mt-2 text-white">
-            <Button
-              label="All"
-              color="bg-sky-500 hover:bg-sky-600"
-              additionalStyles=""
-              onClick={() => filterTasks("all")}
-            />
-            <Button
-              label="Completed"
-              color="bg-green-500 hover:bg-green-600"
-              onClick={() => filterTasks("Completed")}
-            />
-            <Button
-              label="Incomplete"
-              color="bg-red-500 hover:bg-red-600"
-              onClick={() => filterTasks("Incomplete")}
-            />
+            {filterButtons.map((button, index) => (
+              <Button
+                key={index}
+                label={button.label}
+                color={button.color}
+                onClick={button.onClick}
+              />
+            ))}
           </div>
         )}
         <TodoForm
@@ -105,6 +113,9 @@ const App = () => {
           handleInputChange={handleInputChange}
           handleAddTodo={handleAddTodo}
           isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
+          setEditTodoId={setEditTodoId}
+          editTodoId={editTodoId}
         />
       </div>
     </>
