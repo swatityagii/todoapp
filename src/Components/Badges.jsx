@@ -1,19 +1,20 @@
 import PropTypes from "prop-types";
 
-function Badges({ completed }) {
+function Badges(props) {
+  const { completed, color, label } = props;
   return (
-    <>
-      {completed ? (
-        <span className={"bg-green-500 rounded-sm pl-1 pr-1 ml-3"}>Completed</span>
-      ) : (
-        <span className={"ml-3 rounded-sm pl-1 pr-1 bg-red-500 "}>Incomplete</span>
-      )}
-    </>
+    <span
+      className={`ml-3 rounded-sm pl-1 pr-1 text-white text-sm ${color} cursor-default`}
+    >
+      {label}
+      {completed}
+    </span>
   );
 }
-
 Badges.propTypes = {
   completed: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default Badges;

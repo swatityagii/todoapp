@@ -1,23 +1,21 @@
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function Icons({ onEdit, onDelete }) {
+function Icons(props) {
+  const { icon, color, onClick } = props;
+
   return (
-    <div className="flex text-white text-sm">
-      <span className="ml-3 text-sky-500" onClick={onEdit}>
-        <FontAwesomeIcon icon={faPencilAlt} />
-      </span>
-      <span className="text-red-500 ml-3" onClick={onDelete}>
-        <FontAwesomeIcon icon={faTrash} />
-      </span>
-    </div>
+    <FontAwesomeIcon
+      className={`ml-3 ${color}`}
+      icon={icon}
+      onClick={onClick}
+    />
   );
 }
-
 Icons.propTypes = {
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default Icons;

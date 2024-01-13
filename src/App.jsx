@@ -93,6 +93,9 @@ const App = () => {
           handleDeleteTodo={handleDeleteTodo}
           handleEditTodo={handleEditTodo}
           editTodoId={editTodoId}
+          handleAddTodo={handleAddTodo}
+          setIsEditMode={setIsEditMode}
+          setEditTodoId={setEditTodoId}
         />
 
         <h4 className=" w-full font-semibold">Todo</h4>

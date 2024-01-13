@@ -58,8 +58,8 @@ TodoForm.propTypes = {
   inputValue: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   handleAddTodo: PropTypes.func.isRequired,
-  isEditMode: PropTypes.bool,
-  setIsEditMode: PropTypes.bool,
-  setEditTodoId: PropTypes.string.isRequired,
+  isEditMode: PropTypes.bool.isRequired,
+  setIsEditMode: PropTypes.func.isRequired,
+  setEditTodoId: PropTypes.func.isRequired,
 };
 export default TodoForm;
