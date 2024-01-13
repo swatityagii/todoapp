@@ -1,6 +1,7 @@
-import BadgesAndIcons from "./BadgesAndIcons";
 import { Input } from "./Input";
 import PropTypes from "prop-types";
+import Badges from "./Badges";
+import Icons from "./Icons";
 function TodoList(props) {
   const {
     todos,
@@ -15,13 +16,13 @@ function TodoList(props) {
       {todos.map((todo) => (
         <div
           key={todo.id}
-          className={`border rounded-md pr-1 pl-2 h-8 w-full  flex items-center justify-between ${
+          className={`border rounded-md p-1 w-full  flex items-center justify-between ${
             todo.id !== editTodoId
               ? "border-slate-300"
               : "border-sky-500 border-2"
           }`}
         >
-          <div className="flex overflow-scroll ">
+          <div className="flex overflow-scroll">
             <Input
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
@@ -30,12 +31,13 @@ function TodoList(props) {
             />
             <span>{todo.name}</span>
           </div>
-
-          <BadgesAndIcons
-            completed={todo.completed}
-            onEdit={() => handleEditTodo(todo.id)}
-            onDelete={() => handleDeleteTodo(todo.id)}
-          />
+          <div className="flex text-white text-sm">
+            <Badges completed={todo.completed} />
+            <Icons
+              onEdit={() => handleEditTodo(todo.id)}
+              onDelete={() => handleDeleteTodo(todo.id)}
+            />
+          </div>
         </div>
       ))}
     </div>
