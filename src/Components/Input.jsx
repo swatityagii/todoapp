@@ -1,6 +1,8 @@
+
 import PropTypes from "prop-types";
-export function Input(props) {
-  const { inputValue, checked, onChange, type, className, placeholder } = props;
+
+  function Input({inputValue, checked, onChange, type, className, placeholder}){
+
   return (
     <input
       className={className}
@@ -12,6 +14,7 @@ export function Input(props) {
     />
   );
 }
+
 Input.propTypes = {
   inputValue: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
@@ -21,3 +24,4 @@ Input.propTypes = {
   className: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
 };
+export default Input;

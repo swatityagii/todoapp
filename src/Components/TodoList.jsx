@@ -1,10 +1,11 @@
+
+import { useTodoContext } from "../Context/TodoContext";
 import { Input } from "./Input";
-import PropTypes from "prop-types";
 import Badges from "./Badges";
 import Icons from "./Icons";
-
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-function TodoList(props) {
+
+function TodoList() {
   const {
     todos,
     handleToggleComplete,
@@ -14,7 +15,7 @@ function TodoList(props) {
     handleAddTodo,
     setIsEditMode,
     setEditTodoId,
-  } = props;
+  } = useTodoContext();
 
   const handleEditDelete = (e) => {
     handleAddTodo(e, false);
@@ -46,7 +47,7 @@ function TodoList(props) {
             {todo.completed ? (
               <Badges color="bg-green-500" label="Completed" />
             ) : (
-              <Badges color="bg-red-500" label="InComplete" />
+              <Badges color="bg-red-500" label="Incomplete" />
             )}
 
             <Icons
@@ -68,20 +69,5 @@ function TodoList(props) {
     </div>
   );
 }
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  handleToggleComplete: PropTypes.func.isRequired,
-  handleDeleteTodo: PropTypes.func.isRequired,
-  handleEditTodo: PropTypes.func.isRequired,
-  editTodoId: PropTypes.string.isRequired,
-  handleAddTodo: PropTypes.func.isRequired,
-  setIsEditMode: PropTypes.func.isRequired,
-  setEditTodoId: PropTypes.func.isRequired,
-};
 
 export default TodoList;
