@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
-import { useTodoContext } from "../Context/TodoContext";
+// import { useTodoContext } from "../Context/TodoContext";
 // function Badges(props) {
 //   const {  color, label } = props;
-  function Badges() {
-    const {
-      color,
-      label
-    } = useTodoContext();
+
+function Badges({color, label}){
 
   return (
     <span

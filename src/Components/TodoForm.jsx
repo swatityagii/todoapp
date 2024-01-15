@@ -63,7 +63,7 @@
 // //   setEditTodoId: PropTypes.func.isRequired,
 // // };
 // export default TodoForm;
-import { Input } from "./Input";
+import  Input  from "./Input";
 import Button from "./Button";
 import { useTodoContext } from "../Context/TodoContext"; // Import the context hook
 
@@ -75,11 +75,11 @@ function TodoForm() {
     isEditMode,
     setIsEditMode,
     setEditTodoId,
-    todos, 
+ 
   } = useTodoContext();
 
-  const handleCancel = (e) => {
-    handleAddTodo(e, false);
+  const handleCancel = () => {
+    handleAddTodo( false);
     setIsEditMode(false);
     setEditTodoId(null);
   };
@@ -120,15 +120,6 @@ function TodoForm() {
         )}
       </div>
       
-      
-      <div>
-        <h3>Todos from Context:</h3>
-        <ul>
-          {todos.map((todo) => (
-            <li key={todo.id}>{todo.name}</li>
-          ))}
-        </ul>
-      </div>
     </form>
   );
 }

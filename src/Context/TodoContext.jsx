@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 
 const TodoContext = createContext();
 
-export const TodoProvider = ({ children  }) => {
+ const TodoProvider = ({ children  }) => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editTodoId, setEditTodoId] = useState(null);
@@ -100,11 +100,15 @@ export const TodoProvider = ({ children  }) => {
     filteredTodos,
     filterButtons,
   };
+ 
   return (
     <TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>
+    
   );
 };
 
-export const useTodoContext = () => {
+const useTodoContext = () => {
   return useContext(TodoContext);
 };
+
+export { TodoProvider, useTodoContext };
