@@ -2,25 +2,26 @@ import { useTodoContext } from "../Context/TodoContext";
 import Input from "./Input";
 import Badges from "./Badges";
 import Icons from "./Icons";
-import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function TodoList() {
   const {
     todos,
     handleToggleComplete,
-    handleDeleteTodo,
-    handleEditTodo,
+    // handleDeleteTodo,
+    // handleEditTodo,
     editTodoId,
-    handleAddTodo,
-    setIsEditMode,
-    setEditTodoId,
+    // handleEditDelete,
+    // handleAddTodo,
+    // setIsEditMode,
+    // setEditTodoId,
   } = useTodoContext();
 
-  const handleEditDelete = (e) => {
-    handleAddTodo(e, false);
-    setIsEditMode(false);
-    setEditTodoId(null);
-  };
+  // const handleEditDelete = (e) => {
+  //   handleAddTodo(e, false);
+  //   setIsEditMode(false);
+  //   setEditTodoId(null);
+  // };
 
   return (
     <div className="flex flex-col w-full pt-3 pb-3 gap-3">
@@ -52,15 +53,17 @@ function TodoList() {
             <Icons
               color="text-sky-500"
               icon={faPencilAlt}
-              onClick={() => handleEditTodo(todo.id)}
+
+              // onClick={() => handleEditTodo(todo.id)}
             />
             <Icons
               color="text-red-500"
               icon={faTrash}
-              onClick={() => {
-                handleDeleteTodo(todo.id);
-                handleEditDelete();
-              }}
+
+              // onClick={() => {
+              //   handleDeleteTodo(todo.id);
+              //   handleEditDelete();
+              // }}
             />
           </div>
         </div>
@@ -68,5 +71,4 @@ function TodoList() {
     </div>
   );
 }
-
 export default TodoList;

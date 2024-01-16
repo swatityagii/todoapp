@@ -7,7 +7,7 @@ const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editTodoId, setEditTodoId] = useState(null);
-  const [filtertask, setFilterTask] = useState("All");
+  const [filterTask, setFilterTask] = useState("All");
   const [isEditMode, setIsEditMode] = useState(false);
 
   const handleInputChange = (event) => {
@@ -56,7 +56,7 @@ const TodoProvider = ({ children }) => {
   };
 
   const filteredTodos = () => {
-    switch (filtertask) {
+    switch (filterTask) {
       case "Completed":
         return todos.filter((todo) => todo.completed);
       case "Incomplete":
@@ -65,12 +65,35 @@ const TodoProvider = ({ children }) => {
         return todos;
     }
   };
+  const filterButtons = [
+    {
+      label: "All",
+      color: "bg-sky-500 hover:bg-sky-600",
+      onClick: () => filterTasks("All"),
+    },
+    {
+      label: "Completed",
+      color: "bg-green-500 hover:bg-green-600",
+      onClick: () => filterTasks("Completed"),
+    },
+    {
+      label: "Incomplete",
+      color: "bg-red-500 hover:bg-red-600",
+      onClick: () => filterTasks("Incomplete"),
+    },
+  ];
+  const handleEditDelete = (e) => {
+    handleAddTodo(e, false);
+    setIsEditMode(false);
+    setEditTodoId(null);
+  };
+  
 
   const contextValue = {
     todos,
     inputValue,
     editTodoId,
-    filtertask,
+    filterTask,
     isEditMode,
     handleInputChange,
     handleAddTodo,
@@ -80,6 +103,8 @@ const TodoProvider = ({ children }) => {
     filterTasks,
     setFilterTask,
     filteredTodos,
+    handleEditDelete,
+    filterButtons,
   };
 
   return (

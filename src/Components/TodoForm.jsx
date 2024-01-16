@@ -1,6 +1,6 @@
 import Input from "./Input";
 import Button from "./Button";
-import { useTodoContext } from "../Context/TodoContext"; // Import the context hook
+import { useTodoContext } from "../Context/TodoContext"; 
 
 function TodoForm() {
   const {
@@ -31,7 +31,7 @@ function TodoForm() {
             ? "border-red-500 border-2 focus:outline-none"
             : "border-slate-300"
         }  `}
-        inputValue={inputValue}
+
         onChange={handleInputChange}
         placeholder="Your Todo..."
         type="text"
