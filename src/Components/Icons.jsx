@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Icons(props) {
   const { icon, color, onClick } = props;
-  
-  
 
   return (
     <FontAwesomeIcon

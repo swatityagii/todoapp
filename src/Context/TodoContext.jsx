@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 
 const TodoContext = createContext();
 
- const TodoProvider = ({ children  }) => {
+const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [editTodoId, setEditTodoId] = useState(null);
@@ -53,26 +53,7 @@ const TodoContext = createContext();
 
   const filterTasks = (filter) => {
     setFilterTask(filter);
-    console.log(filter);
   };
-
-  const filterButtons = [
-    {
-      label: "All",
-      color: "bg-sky-500 hover:bg-sky-600",
-      onClick: () => filterTasks("all"),
-    },
-    {
-      label: "Completed",
-      color: "bg-green-500 hover:bg-green-600",
-      onClick: () => filterTasks("Completed"),
-    },
-    {
-      label: "Incomplete",
-      color: "bg-red-500 hover:bg-red-600",
-      onClick: () => filterTasks("Incomplete"),
-    },
-  ];
 
   const filteredTodos = () => {
     switch (filtertask) {
@@ -97,13 +78,12 @@ const TodoContext = createContext();
     handleToggleComplete,
     handleEditTodo,
     filterTasks,
+    setFilterTask,
     filteredTodos,
-    filterButtons,
   };
- 
+
   return (
     <TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>
-    
   );
 };
 

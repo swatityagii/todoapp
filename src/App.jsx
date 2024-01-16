@@ -127,7 +127,6 @@
 
 // export default App;
 
-
 import { TodoProvider, useTodoContext } from "./Context/TodoContext";
 import TodoList from "./Components/TodoList";
 import TodoForm from "./Components/TodoForm";
@@ -145,10 +144,28 @@ const App = () => {
     handleToggleComplete,
     handleEditTodo,
     filteredTodos,
-    filterButtons,
+    filterTasks,
     setIsEditMode,
     setEditTodoId,
   } = useTodoContext();
+
+  const filterButtons = [
+    {
+      label: "All",
+      color: "bg-sky-500 hover:bg-sky-600",
+      onClick: () => filterTasks("All"),
+    },
+    {
+      label: "Completed",
+      color: "bg-green-500 hover:bg-green-600",
+      onClick: () => filterTasks("Completed"),
+    },
+    {
+      label: "Incomplete",
+      color: "bg-red-500 hover:bg-red-600",
+      onClick: () => filterTasks("Incomplete"),
+    },
+  ];
 
   return (
     <TodoProvider>

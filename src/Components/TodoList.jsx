@@ -1,6 +1,5 @@
-
 import { useTodoContext } from "../Context/TodoContext";
-import Input  from "./Input";
+import Input from "./Input";
 import Badges from "./Badges";
 import Icons from "./Icons";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -58,10 +57,9 @@ function TodoList() {
             <Icons
               color="text-red-500"
               icon={faTrash}
-              onClick={(e) => {
+              onClick={() => {
                 handleDeleteTodo(todo.id);
-                handleEditDelete(e);
-                
+                handleEditDelete();
               }}
             />
           </div>
