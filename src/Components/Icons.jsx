@@ -1,51 +1,23 @@
-// import PropTypes from "prop-types";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// function Icons(props) {
-//   const { icon, color, onClick } = props;
-
-//   return (
-//     <FontAwesomeIcon
-//       className={`ml-3 ${color}`}
-//       icon={icon}
-//       onClick={onClick}
-//     />
-//   );
-// }
-
-// Icons.propTypes = {
-//   icon: PropTypes.string.isRequired,
-//   onClick: PropTypes.func.isRequired,
-//   color: PropTypes.string.isRequired,
-// };
-
-// export default Icons;
-
-
-
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTodoContext } from "../Context/TodoContext";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function Icons({ icon, color }) {
-  const { handleEditTodo, handleDeleteTodo, handleEditDelete, editTodoId } = useTodoContext();
+function Icons({ icon, color, todoId }) {
+  const { handleEditTodo, handleDeleteTodo, handleEditDelete } =
+    useTodoContext();
 
   const handleIconClick = () => {
     console.log("Icon clicked:", icon);
-    console.log(editTodoId);
-    switch (icon) {
-      case "faPencilAlt":
-        handleEditTodo(editTodoId);
-        break;
-      case "faTrash":
-        handleDeleteTodo(editTodoId);
-        handleEditDelete();
-        break;
-      default:
-        break;
+    console.log(todoId);
+
+    if (icon === faPencilAlt) {
+      handleEditTodo(todoId);
+    } else if (icon === faTrash) {
+      handleDeleteTodo(todoId);
+      handleEditDelete();
     }
   };
-
   return (
     <FontAwesomeIcon
       className={`ml-3 ${color}`}
@@ -56,8 +28,9 @@ function Icons({ icon, color }) {
 }
 
 Icons.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,
+  todoId: PropTypes.string.isRequired,
 };
 
 export default Icons;

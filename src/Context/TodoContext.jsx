@@ -1,14 +1,23 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { v4 } from "uuid";
 
 const TodoContext = createContext();
 
 const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useState([]);
+  const localStorageKey = "todos";
+
+  const [todos, setTodos] = useState(() => {
+    const storedTodos = localStorage.getItem(localStorageKey);
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
   const [inputValue, setInputValue] = useState("");
   const [editTodoId, setEditTodoId] = useState(null);
   const [filterTask, setFilterTask] = useState("All");
   const [isEditMode, setIsEditMode] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(todos));
+  }, [todos]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -87,7 +96,6 @@ const TodoProvider = ({ children }) => {
     setIsEditMode(false);
     setEditTodoId(null);
   };
-  
 
   const contextValue = {
     todos,
