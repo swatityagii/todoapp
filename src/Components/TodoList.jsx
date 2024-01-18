@@ -5,12 +5,12 @@ import Icons from "./Icons";
 
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function TodoList({ todos }) {
-  const { handleToggleComplete, editTodoId } = useTodoContext();
+function TodoList() {
+  const { handleToggleComplete, editTodoId,filteredTodos  } = useTodoContext();
 
   return (
-    <div className="flex flex-col w-full pt-3 pb-3 gap-3 ">
-      {todos.map((todo) => (
+    <div className="flex flex-col w-full pt-3 pb-3 gap-3 h-60 overflow-y-auto ">
+      {filteredTodos().map((todo) => (
         <div
           key={todo.id}
           className={`border rounded-md p-1 w-full  flex items-center justify-between ${
