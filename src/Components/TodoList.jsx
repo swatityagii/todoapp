@@ -1,30 +1,16 @@
-import { Input } from "./Input";
-import PropTypes from "prop-types";
+import { useTodoContext } from "../Context/TodoContext";
+import Input from "./Input";
 import Badges from "./Badges";
 import Icons from "./Icons";
 
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-function TodoList(props) {
-  const {
-    todos,
-    handleToggleComplete,
-    handleDeleteTodo,
-    handleEditTodo,
-    editTodoId,
-    handleAddTodo,
-    setIsEditMode,
-    setEditTodoId,
-  } = props;
 
-  const handleEditDelete = (e) => {
-    handleAddTodo(e, false);
-    setIsEditMode(false);
-    setEditTodoId(null);
-  };
+function TodoList() {
+  const { handleToggleComplete, editTodoId,filteredTodos  } = useTodoContext();
 
   return (
-    <div className="flex flex-col w-full pt-3 pb-3 gap-3">
-      {todos.map((todo) => (
+    <div className="flex flex-col w-full pt-3 pb-3 gap-3 h-60 overflow-y-auto ">
+      {filteredTodos().map((todo) => (
         <div
           key={todo.id}
           className={`border rounded-md p-1 w-full  flex items-center justify-between ${
@@ -33,12 +19,12 @@ function TodoList(props) {
               : "border-sky-500 border-2"
           }`}
         >
-          <div className="flex overflow-scroll">
-            <Input
+          <div className="flex overflow-scroll ">
+            <Input 
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
               type="checkbox"
-              className="mr-2 cursor-pointer"
+              className="mr-2 cursor-pointer "
             />
             <span>{todo.name}</span>
           </div>
@@ -46,42 +32,16 @@ function TodoList(props) {
             {todo.completed ? (
               <Badges color="bg-green-500" label="Completed" />
             ) : (
-              <Badges color="bg-red-500" label="InComplete" />
+              <Badges color="bg-red-500" label="Incomplete" />
             )}
 
-            <Icons
-              color="text-sky-500"
-              icon={faPencilAlt}
-              onClick={() => handleEditTodo(todo.id)}
-            />
-            <Icons
-              color="text-red-500"
-              icon={faTrash}
-              onClick={(e) => {
-                handleDeleteTodo(todo.id);
-                handleEditDelete(e);
-              }}
-            />
+            <Icons color="text-sky-500" icon={faPencilAlt} todoId={todo.id} />
+            <Icons color="text-red-500" icon={faTrash} todoId={todo.id} />
           </div>
         </div>
       ))}
     </div>
   );
 }
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  handleToggleComplete: PropTypes.func.isRequired,
-  handleDeleteTodo: PropTypes.func.isRequired,
-  handleEditTodo: PropTypes.func.isRequired,
-  editTodoId: PropTypes.string.isRequired,
-  handleAddTodo: PropTypes.func.isRequired,
-  setIsEditMode: PropTypes.func.isRequired,
-  setEditTodoId: PropTypes.func.isRequired,
-};
 
 export default TodoList;

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
-function Badges(props) {
-  const {  color, label } = props;
+function Badges({ color, label }) {
   return (
     <span
       className={`ml-3 rounded-sm pl-1 pr-1 text-white text-sm ${color} cursor-default`}

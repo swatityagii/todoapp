@@ -1,7 +1,8 @@
-import { Input } from "./Input";
-import PropTypes from "prop-types";
+import Input from "./Input";
 import Button from "./Button";
-function TodoForm(props) {
+import { useTodoContext } from "../Context/TodoContext";
+
+function TodoForm() {
   const {
     inputValue,
     handleInputChange,
@@ -9,9 +10,10 @@ function TodoForm(props) {
     isEditMode,
     setIsEditMode,
     setEditTodoId,
-  } = props;
-  const handleCancel = (e) => {
-    handleAddTodo(e, false);
+  } = useTodoContext();
+
+  const handleCancel = () => {
+    handleAddTodo(false);
     setIsEditMode(false);
     setEditTodoId(null);
   };
@@ -29,7 +31,6 @@ function TodoForm(props) {
             ? "border-red-500 border-2 focus:outline-none"
             : "border-slate-300"
         }  `}
-        inputValue={inputValue}
         onChange={handleInputChange}
         placeholder="Your Todo..."
         type="text"
@@ -38,7 +39,7 @@ function TodoForm(props) {
       <div className="">
         {isEditMode ? (
           <>
-            {inputValue.trim() === "" && (
+            {inputValue.trim() === "" &&   (
               <p className="text-red-500 mb-3">
                 *You cannot update the task to empty, Please enter some valid
                 task.
@@ -54,12 +55,5 @@ function TodoForm(props) {
     </form>
   );
 }
-TodoForm.propTypes = {
-  inputValue: PropTypes.string.isRequired,
-  handleInputChange: PropTypes.func.isRequired,
-  handleAddTodo: PropTypes.func.isRequired,
-  isEditMode: PropTypes.bool.isRequired,
-  setIsEditMode: PropTypes.func.isRequired,
-  setEditTodoId: PropTypes.func.isRequired,
-};
+
 export default TodoForm;
