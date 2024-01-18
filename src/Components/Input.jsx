@@ -19,8 +19,8 @@ function Input({ type, className, placeholder, checked, onChange }) {
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
+  placeholder: PropTypes.string,
+  checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 

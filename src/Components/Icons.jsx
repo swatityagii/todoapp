@@ -7,15 +7,14 @@ function Icons({ icon, color, todoId }) {
   const { handleEditTodo, handleDeleteTodo, handleEditDelete } =
     useTodoContext();
 
-  const handleIconClick = () => {
-    console.log("Icon clicked:", icon);
-    console.log(todoId);
+  const handleIconClick = (e) => {
+
 
     if (icon === faPencilAlt) {
       handleEditTodo(todoId);
     } else if (icon === faTrash) {
       handleDeleteTodo(todoId);
-      handleEditDelete();
+      handleEditDelete(e);
     }
   };
   return (

@@ -9,7 +9,7 @@ function TodoList({ todos }) {
   const { handleToggleComplete, editTodoId } = useTodoContext();
 
   return (
-    <div className="flex flex-col w-full pt-3 pb-3 gap-3">
+    <div className="flex flex-col w-full pt-3 pb-3 gap-3 ">
       {todos.map((todo) => (
         <div
           key={todo.id}
@@ -19,12 +19,12 @@ function TodoList({ todos }) {
               : "border-sky-500 border-2"
           }`}
         >
-          <div className="flex overflow-scroll">
-            <Input
+          <div className="flex overflow-scroll ">
+            <Input 
               checked={todo.completed}
               onChange={() => handleToggleComplete(todo.id)}
               type="checkbox"
-              className="mr-2 cursor-pointer"
+              className="mr-2 cursor-pointer "
             />
             <span>{todo.name}</span>
           </div>

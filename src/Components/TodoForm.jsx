@@ -39,7 +39,7 @@ function TodoForm() {
       <div className="">
         {isEditMode ? (
           <>
-            {inputValue.trim() === "" && (
+            {inputValue.trim() === "" &&   (
               <p className="text-red-500 mb-3">
                 *You cannot update the task to empty, Please enter some valid
                 task.
